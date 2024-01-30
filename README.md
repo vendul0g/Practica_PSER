@@ -31,71 +31,56 @@ loop{
 ```
 
 ---
-# Grafana - influxDB
-ReadMe
---
-# docker-compose-influxdb-grafana
 
-The project relies on https://github.com/jkehres/docker-compose-influxdb-grafana to deploy influxdb and grafana. However, minor updates have been performed.
+Based on the contents of the unzipped project directory, here is an overview of the project's structure and its components:
 
-## Prerequisites
+### Project Overview: Practical PSER
 
-* Clone the repository
-```
-git clone https://ants-gitlab.inf.um.es/amzarca/docker-compose-influxdb-grafana
-```
-* cd docker-compose-influxdb-grafana
-* Install docker and docker compose if they were not previously installed
-```
-./install-docker.sh
-```
-* Deploy the services
-```
-docker-compose up
-```
+#### Directories and Files:
 
-## Configure grafana
-### Configure influxdb data source
-Enter to the dashboard
-```
-http://localhost:3000/login
-admin:admin (If you have modified .env, use the new values you have provided)
-```
-* Configuration-> data source
-* Select influxDB
-* Query Language -> Select Flux instead of FluxQL
-* Provide the following inputs from .env:
-	* Organization
-	* Token
-	* Default Bucket
-* Save and test
+1. **.obsidian**:
+   - Contains configuration files for the Obsidian application, which is likely used for documentation or note-taking. Files include workspace settings, plugin configurations, appearance settings, and hotkeys.
 
-### Create panel with query
-* Create new panel
-* You can use the following query as example:
-```
-from(bucket: "pser_umu_bucket")
-  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)
-  |> filter(fn: (r) =>
-    r._measurement == "iot" and
-    (r._field == "temperature" or r._field == "humidity")
-  )
-```
-* Press on query inspector and test the query
+2. **.swp**:
+   - A file, possibly a temporary swap file used by an editor like Vim.
 
-## Built With
+3. **adaptador_mqtt_influxdb**:
+   - This directory seems to contain scripts and configuration files related to an adapter that connects MQTT to InfluxDB.
+   - Files:
+     - `env_export.sh`: A shell script, possibly for setting environment variables.
+     - `.env`: Environment variables file.
+     - `adapter`: A directory, contents unknown.
+     - `adapter_mqtt_influx-db.py`: Python script for the adapter.
 
-* [Docker](https://www.docker.com/) - Docker containers
-* [influxdb-grafana](https://github.com/jkehres/docker-compose-influxdb-grafana) - Base services
+4. **alertas**:
+   - Related to alerting mechanisms.
+   - Files:
+     - `create_alert.py`: Python script to create alerts.
+     - `alerts`: A directory, contents unknown.
+     - `images`: A directory, possibly contains images used in alerts.
 
-## Authors
+5. **docker**:
+   - Contains Docker-related files, indicating the use of containerization in the project.
+   - Files:
+     - `LICENSE`: The license file for the project.
+     - `docker-compose.yml`: Docker Compose configuration file.
+     - `grafana-provisioning`: A directory, likely for Grafana setup.
+     - `install-docker-ubuntu.sh`: Shell script to install Docker on Ubuntu.
+     - `env_export.sh`: Another shell script for environment variables.
+     - `README.md`: Markdown file, probably providing information about this directory.
+     - `.env`: Another environment variables file.
 
-* **Alejandro Molina Zarca** - *Main developer/SysAdmin* -
+6. **launch_all.sh**:
+   - A shell script file, possibly used to start the entire project or various components.
 
-## License
+7. **wokwi**:
+   - Related to Wokwi, which is often used for Arduino and IoT projects.
+   - Files:
+     - `wokwi.ino`: Arduino sketch file.
+     - `old_wokwi.ino`: An older version of the Arduino sketch file.
 
-This project is licensed under the MIT License
+#### Project Description:
 
-## Acknowledgments
+This project appears to be an IoT (Internet of Things) solution, integrating various technologies like MQTT for messaging, InfluxDB for time-series database management, and Docker for containerization. The project includes alerting mechanisms, possibly for monitoring IoT devices or data streams. Arduino sketches in the Wokwi directory suggest the use of microcontrollers in the project. The inclusion of Grafana (inferred from the docker directory) hints at data visualization capabilities. The setup and management of these components seem to be facilitated through various shell scripts and Python programs. 
 
-* Department of Information and Communications Engineering, Faculty of Computer Science, University of Murcia.
+The exact functionality of each component and how they interact within the project would require a deeper dive into the individual files and scripts.
